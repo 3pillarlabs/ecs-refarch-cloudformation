@@ -23,7 +23,7 @@ Parameters:
     Path: 
         Description: The path to register with the Application Load Balancer
         Type: String
-        Default: /products
+        Default: /service2
 
 Resources:
 
@@ -36,21 +36,21 @@ Resources:
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
             LoadBalancers: 
-                - ContainerName: "product-service"
-                  ContainerPort: 8001
+                - ContainerName: "service2container"
+                  ContainerPort: 2222
                   TargetGroupArn: !Ref TargetGroup
 
     TaskDefinition:
         Type: AWS::ECS::TaskDefinition
         Properties:
-            Family: product-service
+            Family: service2container
             ContainerDefinitions:
-                - Name: product-service
+                - Name: service2container
                   Essential: true
-                  Image: 275396840892.dkr.ecr.us-east-1.amazonaws.com/ecs-refarch-cloudformation/product-service:1.0.0
-                  Memory: 128
+                  Image: 356967975209.dkr.ecr.us-east-1.amazonaws.com/springbootservice2:1.1
+                  Memory: 300
                   PortMappings:
-                    - ContainerPort: 8001
+                    - ContainerPort: 2222
                   LogConfiguration:
                     LogDriver: awslogs
                     Options:
@@ -71,8 +71,8 @@ Resources:
             Protocol: HTTP
             Matcher: 
                 HttpCode: 200-299
-            HealthCheckIntervalSeconds: 10
-            HealthCheckPath: /products
+            HealthCheckIntervalSeconds: 100
+            HealthCheckPath: /service2
             HealthCheckProtocol: HTTP
             HealthCheckTimeoutSeconds: 5
             HealthyThresholdCount: 2
