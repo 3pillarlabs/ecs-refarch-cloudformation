@@ -83,7 +83,7 @@ You can launch this CloudFormation stack in your account:
 
 ### Create a new ECS service
 
-1. Push your container to a registry somewhere (e.g., [Amazon ECR](https://aws.amazon.com/ecr/)).
+1. Push your docker image to a registry somewhere ([Docker Hub](https://hub.docker.com/) or [Amazon ECR](https://aws.amazon.com/ecr/)).
 2. Copy one of the existing service templates in [services/*](/services).
 3. Update the `ContainerName` and `Image` parameters to point to your container image instead of the example container.
 4. Increment the `ListenerRule` priority number (no two services can have the same priority number - this is used to order the ALB path based routing rules).
@@ -104,7 +104,7 @@ For more information, see the [LogConfiguration](http://docs.aws.amazon.com/Amaz
 
 This is specified in the [master.yaml](master.yaml) template.
 
-By default, [t2.large](https://aws.amazon.com/ec2/instance-types/) instances are used, but you can change this by modifying the following section:
+By default, [t2.small](https://aws.amazon.com/ec2/instance-types/) instances are used, but you can change this by modifying the following section:
 
 ```
 ECS:
@@ -113,8 +113,8 @@ ECS:
       TemplateURL: ...
       Parameters:
         ... 
-        InstanceType: t2.large
-        InstanceCount: 4
+        InstanceType: t2.small
+        InstanceCount: 2
         ... 
 ```
 
@@ -186,7 +186,7 @@ Service:
   Type: AWS::ECS::Service
     Properties: 
       ...
-      DesiredCount: 4
+      DesiredCount: 2
       DeploymentConfiguration: 
         MaximumPercent: 200
         MinimumHealthyPercent: 50
@@ -200,16 +200,9 @@ The AWS SSM Run Command function, in the EC2 console, can be used to execute com
 
 In order to use Spot with this template, you will need to enable ```SpotPrice``` under the ```AWS::AutoScaling::LaunchConfiguration``` or add in ```AWS::EC2::SpotFleet``` support.  To fully use Hibernation with Spot instances, please review [Spot Instance Interruptions](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html).
 
-
 ### Add a new item to this list
 
 If you found yourself wishing this set of frequently asked questions had an answer for a particular problem, please [submit a pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/). The chances are that others will also benefit from having the answer listed here.
-
-## Contributing
-
-Please [create a new GitHub issue](https://github.com/awslabs/ecs-refarch-cloudformation/issues/new) for any feature requests, bugs, or documentation improvements. 
-
-Where possible, please also [submit a pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) for the change. 
 
 ## License
 
