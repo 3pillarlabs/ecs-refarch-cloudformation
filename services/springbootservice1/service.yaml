@@ -20,6 +20,11 @@ Parameters:
         Description: The Application Load Balancer listener to register with
         Type: String
 
+    Path: 
+        Description: The path to register with the Application Load Balancer
+        Type: String
+        Default: /service1*
+
 Resources:
 
     Service: 
@@ -79,7 +84,8 @@ Resources:
             Priority: 1
             Conditions:
                 - Field: path-pattern
-                  Values: [/service1*]
+                  Values: 
+                    - !Ref Path
             Actions:
                 - TargetGroupArn: !Ref TargetGroup
                   Type: forward
