@@ -19,7 +19,7 @@ Parameters:
     Listener:
         Description: The Application Load Balancer listener to register with
         Type: String
-
+    
     Path: 
         Description: The path to register with the Application Load Balancer
         Type: String

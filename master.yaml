@@ -67,7 +67,7 @@ Resources:
                 Cluster: !GetAtt ECS.Outputs.Cluster
                 DesiredCount: 2
                 Listener: !GetAtt ALB.Outputs.Listener 
-                Path: /service1
+                Path: /service1*
 
     SpringbootService2:
         Type: AWS::CloudFormation::Stack
@@ -78,7 +78,7 @@ Resources:
                 Cluster: !GetAtt ECS.Outputs.Cluster
                 DesiredCount: 2
                 Listener: !GetAtt ALB.Outputs.Listener 
-                Path: /service2
+                Path: /service2*
 
     LifecycleHook:
         Type: AWS::CloudFormation::Stack
