@@ -23,7 +23,7 @@ Parameters:
     Path: 
         Description: The path to register with the Application Load Balancer
         Type: String
-        Default: /service2
+        Default: /service2*
 
 Resources:
 
